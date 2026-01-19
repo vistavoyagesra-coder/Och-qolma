@@ -1,0 +1,9 @@
+{
+  "name": "Och Qolma - Milliy Taomlar va Yetkazib Berish",
+  "description": "O'zbekistonning birinchi raqamli milliy food-tech platformasi. Retseptlar, video darslar va issiq taom yetkazib berish xizmati.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
