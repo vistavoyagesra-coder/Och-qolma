@@ -1,0 +1,34 @@
+pages/Admin.tsx
+import { useState } from 'react';
+
+export default function Admin() {
+  const [password, setPassword] = useState('');
+  const [ok, setOk] = useState(false);
+  if (!ok) {
+    return (
+      <div style={{ padding: 40 }}>
+        <h2>Admin panel</h2>
+        <input
+          type="password"
+          placeholder="Parol"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br /><br />
+        <button
+          onClick={() => {
+            if (password === '1234') setOk(true);
+            else alert('Noto‘g‘ri parol');
+          }}
+        >
+          Kirish
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>Admin Panel</h1>
+      <p>Bu yerda siz saytni boshqarasiz.</p>
+    </div>
+  );
+}
