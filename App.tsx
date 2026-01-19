@@ -5,7 +5,8 @@ import { Recipe, CartItem, OrderStatus, RestaurantStats, PaymentMethod } from '.
 import { geminiService } from './services/geminiService';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'menu' | 'cart' | 'tracking' | 'recipes' | 'favorites' | 'shopping' | 'partner' | 'admin'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'menu' | 'recipes' | 'cart' | 'admin' | 'adminLogin'>('home');
+
   const [cart, setCart] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [shoppingList, setShoppingList] = useState<string[]>([]);
@@ -149,9 +150,57 @@ const App: React.FC = () => {
             </button>
           </div>
         </div>
-      
 
-      <header className="bg-white/80 backdrop-blur-md border-b border-stone-100 sticky top-0 z-50">
+{activeTab === 'admin' && (
+  <div style={{ padding: 40 }}>
+    <h1>Admin Panel</h1>
+    <p>Bu yerda admin boshqaruvi bo‘ladi</p>
+
+    <button onClick={() => alert("Taom qo‘shish")}>
+      + Taom qo‘shish
+    </button>
+
+    <br /><br />
+
+    <button onClick={() => alert("Buyurtmalarni ko‘rish")}>
+      Buyurtmalarni ko‘rish
+    </button>
+  </div>
+)}
+
+        
+{activeTab === 'adminLogin' && (
+  <div className="max-w-md mx-auto mt-20 p-8 bg-white rounded-2xl shadow">
+    <h1 className="text-2xl font-bold mb-6">Admin Login</h1>
+
+    <input
+      type="password"
+      placeholder="Admin paroli"
+      value={adminPassword}
+      onChange={(e) => setAdminPassword(e.target.value)}
+      className="w-full border p-3 rounded mb-4"/>
+
+    <button
+      onClick={() => {
+        if (adminPassword === '1234') {
+          setActiveTab('admin');
+          setAdminPassword('');
+        } else {
+          alert("Noto‘g‘ri parol");
+        }
+      }}
+      className="w-full bg-red-600 text-white py-3 rounded font-bold"
+    >
+      Kirish
+    </button>
+  </div>
+)}
+
+  </div>
+)}
+
+      
+ <header className="bg-white/80 backdrop-blur-md border-b border-stone-100 sticky top-0 z-50">
   <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
 
     {/* chap tomoni — logo */}
@@ -161,18 +210,8 @@ const App: React.FC = () => {
     <div className="flex items-center gap-3">
 
       {/* boshqa tugmalar shu yerda */}
-
-      <button
-        onClick={() => {
-          const parol = prompt('Admin parolni kiriting');
-          if (parol === '1234') {
-            setActiveTab('admin');
-          } else {
-            alert('Noto‘g‘ri parol');
-          }
-        }}
-        className="p-2.5 bg-red-600 rounded-2xl text-white font-bold"
-      >
+      <button onClick={() => setActiveTab('adminLogin')}
+        className="p-2.5 bg-red-600 rounded-2xl text-white font-bold">
         ADMIN
       </button>
 
