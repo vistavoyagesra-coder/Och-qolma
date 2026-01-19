@@ -1,60 +1,76 @@
-import React, { useState, useMemo } from 'react';
-import { recipes } from './data';
-import { Recipe, CartItem } from './types';
+import React, { useState } from 'react';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
-    'home' | 'menu' | 'recipes' | 'cart' | 'adminLogin' | 'admin'
+    'home' | 'menu' | 'recipes' | 'adminLogin' | 'admin'
   >('home');
 
   const [adminPassword, setAdminPassword] = useState('');
 
-  /* ================= HEADER ================= */
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col">
+    <div className="min-h-screen flex flex-col">
 
+      {/* ================= HEADER ================= */}
       <header className="bg-white border-b sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
 
           {/* LOGO */}
           <div
-            className="text-2xl font-black cursor-pointer"
+            className="text-xl font-bold cursor-pointer"
             onClick={() => setActiveTab('home')}
           >
-            Och Qolma<span className="text-orange-500">.</span>
+            Och Qolma.
           </div>
 
           {/* NAV */}
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-6">
             <button onClick={() => setActiveTab('home')}>Home</button>
             <button onClick={() => setActiveTab('menu')}>Menu</button>
             <button onClick={() => setActiveTab('recipes')}>Recipes</button>
 
             <button
               onClick={() => setActiveTab('adminLogin')}
-              className="px-4 py-2 bg-red-600 text-white rounded-xl font-bold"
+              className="bg-red-600 text-white px-4 py-2 rounded-xl font-bold"
             >
               ADMIN
             </button>
           </div>
-
         </div>
       </header>
 
       {/* ================= MAIN ================= */}
       <main className="flex-grow max-w-6xl mx-auto w-full p-6">
 
-        {/* HOME */}
+        {/* -------- HOME -------- */}
         {activeTab === 'home' && (
-          <h1 className="text-4xl font-black">Bosh sahifa</h1>
+          <div>
+            <h1 className="text-4xl font-bold mb-4">Och qoldingizmi?</h1>
+            <p className="text-gray-600">
+              Milliy taomлар, тез етказиб бериш ва уста ошпазлар 👨‍🍳
+            </p>
+          </div>
         )}
 
-        {/* ADMIN LOGIN */}
+        {/* -------- MENU -------- */}
+        {activeTab === 'menu' && (
+          <div>
+            <h1 className="text-3xl font-bold mb-4">Menyu</h1>
+            <p>Bu yerda taomlar ro‘yxati bo‘ladi</p>
+          </div>
+        )}
+
+        {/* -------- RECIPES -------- */}
+        {activeTab === 'recipes' && (
+          <div>
+            <h1 className="text-3xl font-bold mb-4">Retseptlar</h1>
+            <p>Bu yerda retseptlar bo‘ladi</p>
+          </div>
+        )}
+
+        {/* -------- ADMIN LOGIN -------- */}
         {activeTab === 'adminLogin' && (
-          <div className="max-w-md mx-auto mt-20 bg-white p-8 rounded-2xl shadow">
-            <h2 className="text-2xl font-black mb-6 text-center">
-              Admin Login
-            </h2>
+          <div className="max-w-md mx-auto mt-20 p-8 bg-white rounded-2xl shadow">
+            <h1 className="text-2xl font-bold mb-6">Admin Login</h1>
 
             <input
               type="password"
@@ -65,46 +81,44 @@ const App: React.FC = () => {
             />
 
             <button
-              className="w-full bg-red-600 text-white p-3 rounded font-bold"
               onClick={() => {
                 if (adminPassword === '1234') {
                   setActiveTab('admin');
                   setAdminPassword('');
                 } else {
-                  alert("Noto‘g‘ri parol");
+                  alert('Noto‘g‘ri parol');
                 }
               }}
+              className="w-full bg-red-600 text-white p-3 rounded font-bold"
             >
               Kirish
             </button>
           </div>
         )}
 
-        {/* ADMIN PANEL */}
+        {/* -------- ADMIN PANEL -------- */}
         {activeTab === 'admin' && (
-          <div className="bg-white p-10 rounded-2xl shadow">
-            <h1 className="text-3xl font-black mb-6">
-              Admin Panel
-            </h1>
+          <div className="p-10 bg-gray-50 rounded-2xl">
+            <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
 
             <div className="flex gap-4">
               <button
-                className="bg-green-600 text-white px-6 py-3 rounded font-bold"
-                onClick={() => alert("Taom qo‘shish")}
+                onClick={() => alert('Taom qo‘shish')}
+                className="bg-green-600 text-white px-4 py-2 rounded"
               >
                 + Taom qo‘shish
               </button>
 
               <button
-                className="bg-blue-600 text-white px-6 py-3 rounded font-bold"
-                onClick={() => alert("Buyurtmalar")}
+                onClick={() => alert('Buyurtmalar')}
+                className="bg-blue-600 text-white px-4 py-2 rounded"
               >
                 Buyurtmalar
               </button>
 
               <button
-                className="bg-gray-300 px-6 py-3 rounded font-bold"
                 onClick={() => setActiveTab('home')}
+                className="bg-gray-400 text-white px-4 py-2 rounded"
               >
                 Chiqish
               </button>
