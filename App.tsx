@@ -5,7 +5,7 @@ import { Recipe, CartItem, OrderStatus, RestaurantStats, PaymentMethod } from '.
 import { geminiService } from './services/geminiService';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'home' | 'menu' | 'cart' | 'tracking' | 'recipes' | 'favorites' | 'shopping' | 'partner'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'menu' | 'cart' | 'tracking' | 'recipes' | 'favorites' | 'shopping' | 'partner' | 'admin'>('home');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [shoppingList, setShoppingList] = useState<string[]>([]);
@@ -149,12 +149,89 @@ const App: React.FC = () => {
             </button>
           </div>
         </div>
-      </header>
+      
+
+      <header className="bg-white/80 backdrop-blur-md border-b border-stone-100 sticky top-0 z-50">
+  <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+
+    {/* chap tomoni — logo */}
+    <div>LOGO</div>
+
+    {/* o‘ng tomoni — tugmalar */}
+    <div className="flex items-center gap-3">
+
+      {/* boshqa tugmalar shu yerda */}
+
+      <button
+        onClick={() => {
+          const parol = prompt('Admin parolni kiriting');
+          if (parol === '1234') {
+            setActiveTab('admin');
+          } else {
+            alert('Noto‘g‘ri parol');
+          }
+        }}
+        className="p-2.5 bg-red-600 rounded-2xl text-white font-bold"
+      >
+        ADMIN
+      </button>
+
+    </div>
+  </div>
+</header>
 
       {/* Main Content Area */}
-      <main className="flex-grow max-w-6xl mx-auto w-full p-6 pb-32">
-        {activeTab === 'home' && (
-          <div className="space-y-16 animate-in fade-in duration-700">
+<main className="flex-grow max-w-6xl mx-auto w-full p-6 pb-32">
+  {activeTab === 'home' && (
+    <div className="space-y-16">
+      {/* Hero */}
+      <section>...</section>
+
+      {/* Trending */}
+      <section>...</section>
+    </div>
+  )}
+
+  {activeTab === 'menu' && (
+    <div>...</div>
+  )}
+
+  {activeTab === 'recipes' && (
+    <div>...</div>
+  )}
+
+  {activeTab === 'cart' && (
+    <div>...</div>
+  )}
+
+  {activeTab === 'admin' && (
+    <div style={{ padding: 40 }}>
+      <h1>Admin Panel</h1>
+      <p>Bu yerda admin boshqaruvi bo‘ladi</p>
+
+      <button onClick={() => alert("Taom qo‘shish")}>
+        + Taom qo‘shish
+      </button>
+
+      <br /><br />
+
+      <button onClick={() => alert("Buyurtmalarni ko‘rish")}>
+        Buyurtmalarni ko‘rish
+      </button>
+    </div>
+  )}
+
+</main>
+
+
+    <br /><br />
+
+    <button onClick={() => alert("Buyurtmalarni ko‘rish")}>
+      Buyurtmalarni ko‘rish
+    </button>
+  </div>
+)}
+     <div className="space-y-16 animate-in fade-in duration-700">
             {/* Hero Section */}
             <section className="bg-stone-900 rounded-[3.5rem] p-12 md:p-20 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center gap-12">
               <div className="relative z-10 flex-1 space-y-8">
@@ -339,7 +416,21 @@ const App: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                  
+                  {activeTab === 'admin' && (
+  <div style={{ padding: 40 }}>
+    <h1>Admin Panel</h1>
+    <p>Bu yerda admin boshqaruvi bo‘ladi</p>
+
+    <button onClick={() => alert("Taom qo‘shish")} style={{ marginRight: 10 }}>
+      + Taom qo‘shish
+    </button>
+
+    <button onClick={() => alert("Buyurtmalar")}>
+      Buyurtmalarni ko‘rish
+    </button>
+  </div>
+)}
+      
                   {/* Address Selection */}
                   <div className="bg-white rounded-[3rem] p-10 shadow-sm border border-stone-100">
                     <h4 className="text-xl font-black mb-6 tracking-tight">Yetkazib berish manzili</h4>
